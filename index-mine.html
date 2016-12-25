@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+</head>
+<body>
+
+  <div class="hero">
+    <h1 contenteditable>🎄 Merry Christmas!</h1>
+  </div>
+  <div class="tagline">
+    <h2>from Cody Loyd</h2>
+  </div>
+  <style>
+  html {
+    color:black;
+    font-family: sans-serif;
+  }
+  
+  .tagline{
+    position: fixed;
+    width: 100%;
+    bottom: 10vh;
+    text-align: center;
+  }
+  .hero {
+    min-height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:black;
+  }
+
+
+  h1 {
+
+    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    font-size: 80px;
+  }
+  </style>
+
+<script>
+  const hero = document.querySelector('.hero');
+  const text = hero.querySelector('h1');
+  const walk = 200;
+  function shadow(e) {
+    const {offsetWidth: width, offsetHeight: height} = hero;
+    let {offsetX: x, offsetY: y} = e
+
+    if (this != e.target) {
+      x = x + e.target.offsetLeft;
+      y = y + e.target.offsetTop;
+    }
+
+    const xwalk = Math.round((x / width * walk) - (walk / 2))
+    const ywalk = Math.round((y / height * walk) - (walk / 2))
+
+    text.style.textShadow = `${xwalk}px ${ywalk}px #EB0031,
+                             ${-xwalk}px ${ywalk}px 0 hsla(0,95%,60%,.5)  ,
+                             ${-ywalk}px ${-xwalk}px 0 hsla(100,95%,60%,.6), 
+                             ${ywalk}px ${-xwalk}px 0 #00A116`
+  }
+
+  hero.addEventListener('mousemove',shadow)
+</script>
+</body>
+</html>
